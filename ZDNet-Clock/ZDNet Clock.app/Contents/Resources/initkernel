@@ -1,0 +1,57 @@
+#!/bin/sh
+#
+# Kernel Extension Loader for ZDClock 1.0
+# Copyright © 2008 CNET Networks Deutschland GmbH
+# Author: Christoph H. Hochstätter
+#
+# LICENSE
+# =======
+# 
+# This software may be used by anyone. However, any form of
+# modification and redistribution is explicitly prohibited.
+# It is NOT allowed to offer this software for public download
+# nor to distribute it on any media. All other usage is not
+# restricted in any way.
+#
+#
+# DISCLAIMER/WARRANTY
+# ===================
+#
+# THIS SOFTWARE IS PROVIDED BY CNET NETWORKS DEUTSCHLAND GMBH ``AS IS'' AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL CNET NETWORKS DEUTSCHLAND GMBH BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+# OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+# OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+# SUCH DAMAGE.
+#
+# THIS SOFTWARE IS INTENDED TO OPERATE COMPUTER HARDWARE BEYOND THE LIMITS
+# SPECIFIED BY THE MANUFACTURER. THIS MAY CAUSE DAMAGE TO YOUR HARDWARE AND/OR
+# A REDUCED PRODUCT LIFE.
+
+
+log()
+{
+  echo "`date`: $*" >>/var/log/overclock.log
+}
+
+
+rm -f /var/log/overclock.log
+
+log "Starting kext loader..."
+log "overclock.kext path:" "$1"
+
+if [ ! -d "$1" ]; then
+  log "$1" not found.
+  exit 1
+fi  
+
+cp -R "$1" /tmp >>/var/log/overclock.log 2>&1
+chown -R root:wheel /tmp/overclock.kext >>/var/log/overclock.log 2>&1
+kextload -v 1 /tmp/overclock.kext >>/var/log/overclock.log 2>&1
+
+exit 0
