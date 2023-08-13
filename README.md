@@ -7,6 +7,7 @@ Usage:
 2. Run in terminal using your admin password:
 
 sudo chown root:wheel /Library/LaunchDaemons/com.example.d
+
 sudo chmod -rw-r--r-- /Library/LaunchDaemons/com.example.d
 
 3. Copy this inject folder (with this README.txt file inside) to the /Users/Shared folder
