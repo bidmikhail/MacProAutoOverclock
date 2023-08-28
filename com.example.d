@@ -7,7 +7,7 @@
         <key>ProgramArguments</key>
         <array>
             <string>/bin/sh</string>
-            <string>/Users/Shared/inject/overclock_daemon.sh</string>
+            <string>/Users/Shared/overclock/overclock_daemon.sh</string>
         </array>
         <key>RunAtLoad</key>
         <true/>
